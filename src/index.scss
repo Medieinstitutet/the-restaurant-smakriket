@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  font-family: Verdana Tahoma, serif;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

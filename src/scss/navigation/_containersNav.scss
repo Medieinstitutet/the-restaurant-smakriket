@@ -1,0 +1,15 @@
+@use "/src/scss/mixins";
+.container--desktopMenu {
+  display: none;
+}
+
+.container--navigation {
+  @include mixins.devices(desktop) {
+    .container--desktopMenu {
+      display: block;
+    }
+    .container--hamburgerMenu {
+      display: none;
+    }
+  }
+}

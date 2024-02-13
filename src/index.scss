@@ -1,4 +1,8 @@
-@use "/src/scss/navigation/containersNav";
+@use "/src/scss/navigationMenus/containersNav";
+@use "/src/scss/navigationMenus/textsAndLinksNav";
+@use "/src/scss/navigationMenus/buttonsAndIcons";
+@use "/src/scss/homePage/containersHome";
+@use "/src/scss/homePage/textsHome.scss";
 
 body {
   margin: 0;

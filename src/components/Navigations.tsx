@@ -21,11 +21,16 @@ export function Navigation() {
       <section className="container--navigation">
         <HamburgerMenu menuItems={menuItems} showNav={showNav} />
         <section className={!showNav ? "container--desktopMenu" : ""}>
-          <nav className="desktop-menu">
-            <ul>
+          <section className="container--menuLogo__white">
+            <img className="menuLogo__white" src="/src/assets/logoWhite.png" alt="" />
+          </section>
+          <nav className="desktopMenu">
+            <ul className="desktopMenu--list">
               {menuItems.map((menuItem, index) => (
                 <li key={index}>
-                  <NavLink to={menuItem.path}>{menuItem.label}</NavLink>
+                  <NavLink className="desktopMenu--listLinks" to={menuItem.path}>
+                    {menuItem.label}
+                  </NavLink>
                 </li>
               ))}
             </ul>

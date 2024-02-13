@@ -32,9 +32,9 @@ export const HamburgerMenu = (props: IHamburgerMenyProps) => {
         </section>
         <button onClick={toggleHamburgerMenu} className="hamburgerMenu--button">
           {isOpen ? (
-            <IoMdClose className="hamburgerMenu--button__xmark" />
+            <IoMdClose className="hamburgerMenu--icon__xmark" />
           ) : (
-            <IoMdMenu className="hamburgerMenu--button__lines" />
+            <IoMdMenu className="hamburgerMenu--icon__lines" />
           )}
         </button>
         {isOpen && (

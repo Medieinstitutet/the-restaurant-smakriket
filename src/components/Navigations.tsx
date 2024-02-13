@@ -6,10 +6,10 @@ export function Navigation() {
   const [showNav, setShowNav] = useState(false);
 
   const menuItems = [
-    { path: "/", label: "Home" },
-    { path: "/Booking", label: "Booking" },
-    { path: "/Contact", label: "Contact" },
-    { path: "/SignIn", label: "Sign in" },
+    { path: "/", label: "HEM" },
+    { path: "/Booking", label: "BOKA/RESERVE" },
+    { path: "/Contact", label: "KONTAKT" },
+    { path: "/SignIn", label: "LOGGA IN" },
   ];
 
   if (showNav) {
@@ -20,7 +20,6 @@ export function Navigation() {
     <>
       <section className="container--navigation">
         <HamburgerMenu menuItems={menuItems} showNav={showNav} />
-
         <section className={!showNav ? "container--desktopMenu" : ""}>
           <nav className="desktop-menu">
             <ul>

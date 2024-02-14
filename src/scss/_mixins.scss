@@ -21,3 +21,21 @@
     }
   }
 }
+
+@mixin button() {
+  width: fit-content;
+  width: -moz-fit-content;
+  height: fit-content;
+  padding: 7px 7px 7px 7px;
+  font-size: clamp(15px, 1vw, 16px);
+  background-color:v.$primary-color;
+  box-shadow: 2px 2px 1px v.$shadow;
+  border-radius: 5px;
+  color: v.$text-ligth;
+  @content;
+
+&:hover{
+background-color: v.$secondary-color;
+}
+
+}

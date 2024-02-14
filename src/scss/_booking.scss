@@ -1,0 +1,56 @@
+@use "variables" as v;
+@use 'mixins';
+
+@keyframes Blur {
+
+    0% {
+        filter: blur(25px);
+
+    }
+
+    100% {
+
+        filter: blur(0px);
+
+    }
+
+
+}
+
+.BookingArticle {
+    height: fit-content;
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(4, 20, 2, 0.346);
+
+
+}
+
+.BookingContainer {
+    margin: 15px 0;
+    position: relative;
+    height: clamp(400px, 50vw, 500px);
+    width: clamp(100px, 90%, 600px);
+    background-color: rgb(251, 253, 253);
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    border-radius: 5px;
+    animation: Blur 0.6s ease-in;
+    z-index: 10;
+    border: 1px solid v.$background-dark-hollow;
+    font-family: v.$font-one;
+
+    
+
+}
+
+
+

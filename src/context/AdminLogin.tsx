@@ -1,17 +1,15 @@
-import React, { ReactNode, createContext, useState, Dispatch, SetStateAction } from 'react';
+import { ReactNode, createContext, useState, Dispatch, SetStateAction, useContext } from 'react';
 
 interface AdminLoginContextProps {
-    adminLogin: boolean;
-    setAdminLogin: Dispatch<SetStateAction<boolean>>;
+    adminLogin?: boolean;
+    setAdminLogin?: Dispatch<SetStateAction<boolean>>;
+    children?: ReactNode;
 }
 
 export const AdminLoginContext = createContext<AdminLoginContextProps | undefined>(undefined);
 
-interface AdminLoginProviderProps {
-    children?: ReactNode;
-}
 
-export const AdminLoginProvider = ({ children }: AdminLoginProviderProps) => {
+export const AdminLoginProvider = ({ children }: AdminLoginContextProps) => {
     const [adminLogin, setAdminLogin] = useState<boolean>(false);
 
     return (
@@ -20,3 +18,18 @@ export const AdminLoginProvider = ({ children }: AdminLoginProviderProps) => {
         </AdminLoginContext.Provider>
     );
 };
+
+export const UseAdminLoginContext = (): AdminLoginContextProps => {
+    const context = useContext(AdminLoginContext);
+    if (!context) {
+      throw new Error('useProductListContext must be used within a ProductListProvider');
+    }
+    return context;
+  };
+  
+
+
+
+  
+
+  

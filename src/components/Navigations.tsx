@@ -1,24 +1,42 @@
 import { NavLink } from "react-router-dom";
+import { HamburgerMenu } from "./HamburgerMenu";
+import { useState } from "react";
 
 export function Navigation() {
+  const [showNav, setShowNav] = useState(false);
+
+  const menuItems = [
+    { path: "/", label: "HEM" },
+    { path: "/Booking", label: "BOKA/RESERVE" },
+    { path: "/Contact", label: "KONTAKT" },
+    { path: "/SignIn", label: "LOGGA IN" },
+  ];
+
+  if (showNav) {
+    setShowNav(!showNav);
+  }
+
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to={"/"}>Home</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/Booking"}>Booking</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/Contact"}>Contact</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/SignIn"}>Sign in</NavLink>
-          </li>
-        </ul>
-      </nav>
+      <section className="container--navigation">
+        <HamburgerMenu menuItems={menuItems} showNav={showNav} />
+        <section className={!showNav ? "container--desktopMenu" : ""}>
+          <section className="container--menuLogo__white">
+            <img className="menuLogo__white" src="/src/assets/logoWhite.png" alt="" />
+          </section>
+          <nav className="desktopMenu">
+            <ul className="desktopMenu--list">
+              {menuItems.map((menuItem, index) => (
+                <li key={index}>
+                  <NavLink className="desktopMenu--listLinks" to={menuItem.path}>
+                    {menuItem.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </section>
+      </section>
     </>
   );
 }

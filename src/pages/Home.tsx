@@ -1,6 +1,3 @@
-import { useContext } from "react";
-import { AdminLoginContext } from "../context/AdminLogin";
-
 export const Home = () => {
   return (
     <>
@@ -15,4 +12,4 @@ export const Home = () => {
       </section>
     </>
   );
-
+};

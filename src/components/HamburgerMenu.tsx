@@ -25,8 +25,8 @@ export const HamburgerMenu = (props: IHamburgerMenyProps) => {
   };
 
   return (
-    <>
-      <section className={props.showNav ? "" : "container--hamburgerMenu"}>
+   
+      <section className={props.showNav && isOpen ? "hide" : "container--hamburgerMenu"}>
         <section className="container--menuLogo__white">
           <img className="menuLogo__white" src="/src/assets/logoWhite.png" alt="" />
         </section>
@@ -51,6 +51,6 @@ export const HamburgerMenu = (props: IHamburgerMenyProps) => {
           </nav>
         )}
       </section>
-    </>
+
   );
 };

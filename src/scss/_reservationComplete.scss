@@ -1,0 +1,53 @@
+@use "variables" as v;
+@use 'mixins';
+
+.reservationContainer {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background: v.$background-light;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(12px, 1vw, 16px);
+
+    &___bookinginfo {
+
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+
+
+    }
+
+    &___customerinfo {
+        margin: 1.3rem 0 2rem 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+
+        &___h4 {
+
+
+            margin-bottom: 1rem;
+
+        }
+
+    }
+
+
+    &___btn {
+
+        @include mixins.button() {}
+
+
+    }
+}

@@ -1,28 +1,50 @@
-import  {  useState } from 'react'
+import  {  useState, MouseEvent } from 'react'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import moment, { Moment } from "moment";
 import { DatePickerComponent } from './DatePickerComponent';
 import { DropDown } from './DropDown';
+import { UseBookingContext } from '../../context/BookingContext';
 
-const ReserveTable = () => {
-    const [selectedDate, setSelectedDate] = useState<Moment>(moment());
-    const [persons, setPersons] = useState<number>(1)
-  const [findBookings, setFindBookings] = useState<Tables[]>([])
-  const [errorMessage, setErrorMessage] = useState<string>('')
+
+
+interface Props{
   
-  
-  interface Tables {
-    table: string
+    setReservationFlow:(selectedDate:string) => void
   }
   
+  interface FindBooking {
+    time: string
+  }
+
+const ReserveTable = ({setReservationFlow}:Props) => {
+    const [selectedDate, setSelectedDate] = useState<Moment>(moment());
+    const [persons, setPersons] = useState<number>(1)
+  const [findBookings, setFindBookings] = useState<FindBooking[]>([])
+  const [errorMessage, setErrorMessage] = useState<string>('')
+  const { setDate,  setTime,  setNumberOfGuests,  setName,  setLastName,  setEmail,  setPhone} = UseBookingContext()
   
+  
+
+
+
+/* reset all context data */
+    setDate('')
+    setTime('')
+    setNumberOfGuests(0)
+    setName('')
+    setEmail('')
+    setLastName('')
+    setPhone('')
+
+
+
+
   /* Find tables */
   const onClickFindTables = () => {
     console.log(persons, selectedDate)
-  
     if(selectedDate && persons){
-  setFindBookings([{table:'18:00'} , {table:'21:00'}])
+  setFindBookings([{time:'18:00'} , {time:'21:00'}])
     }else{
   setErrorMessage('inga bord')
     }
@@ -30,15 +52,14 @@ const ReserveTable = () => {
   
   
   /* Reserve table */
-  
-  const onClickReserveTable = () =>{
-  
-  setFindBookings([])
-  
-  
-  
+  const onClickReserveTable = (e:  MouseEvent, item:FindBooking) => {
+    e.preventDefault();
+    setFindBookings([]);
+    setReservationFlow('reserveFrom');
+  setTime(item.time)
+  setDate(selectedDate.format('YYYY-MM-DD'))
+  setNumberOfGuests(persons)
   }
-
 
 
   return (
@@ -58,7 +79,7 @@ const ReserveTable = () => {
 
 <> 
 {findBookings.map((item) =>{return(
-<button className="reserveContainer___meassages___timeBtn" onClick={onClickReserveTable}> {item.table} </button>)
+<button className="reserveContainer___meassages___timeBtn" onClick={(e) =>onClickReserveTable(e,item)}> {item.time} </button>)
 }
 )}
 

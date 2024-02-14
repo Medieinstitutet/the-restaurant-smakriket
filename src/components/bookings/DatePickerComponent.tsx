@@ -8,7 +8,7 @@ interface Props{
   setSelectedDate:(selectedDate:Moment) => void
 }
 
-
+const green:string = 'rgb(33, 54, 16)';
 
 const datePickerSlotProps = {
 
@@ -16,28 +16,28 @@ const datePickerSlotProps = {
   
     sx: {
       '&.MuiPickersDay-root.Mui-selected': {
-        backgroundColor: ' #000',
-        
+        backgroundColor: `${green}`,
+   
       },
       ':not(.Mui-selected)': {
-        backgroundColor: '#fff',
-        borderColor: ' #000',
+        backgroundColor: '#ffff',
+        borderColor: `${green}`,
         
       },
       '&:hover': {
-        backgroundColor: ' #000',
+        backgroundColor: `${green}`,
         borderColor: ' #000',
-        color: '#fff',
+        color: '#ffff',
         transition: 'all 0.5s ease',
       },
       '&.Mui-selected': {
-        color: '#fff',
-        backgroundColor: ' #000',
-        borderColor: ' #000',
+        color: '#ffff',
+        backgroundColor: `${green}`,
+        borderColor: `${green}`,
         '&:hover': {
-          color: '#fff',
-          backgroundColor: ' #000',
-          borderColor: ' #000',
+          color: '#ffff',
+          backgroundColor: `${green}`,
+          borderColor: `${green}`,
           transition: 'all 0.5s ease',
         },
       },
@@ -58,8 +58,9 @@ const datePickerSlotProps = {
 const theme = createTheme({
   typography: {
     allVariants: {
-      fontFamily: "Roboto",
-      fontSize: 16,
+      fontFamily: "Roboto, 'Courier New', Courier, monospace",
+      fontSize: 16
+     
     },
   },
 
@@ -73,6 +74,7 @@ const theme = createTheme({
           fontFamily: "Roboto, 'Courier New', Courier, monospace",
           backgroundColor:'white',
           padding:'0 5px',
+         color:'black'
         },
       },
       
@@ -112,35 +114,53 @@ export const DatePickerComponent = ({selectedDate, setSelectedDate}:Props) => {
             ".MuiSvgIcon-root":{
               color: "black",
               outlineColor:'transparent',
-           
+              
             },
 
           '& .MuiInputLabel-root': {
             color: 'black',
-          
+            
           },
           '& .MuiOutlinedInput-input': {
             color: 'black',
+            
            
            
           },
           '& .MuiOutlinedInput-root': {
-            '&:focus  fieldset': {
+            'fieldset': {
               borderColor: 'black',
-              color: 'black'
+              color: 'black',
+              outline:'none',
+              border:'1px solid black'
+            },
+            '&:focus > fieldset': {
+              borderColor: 'black',
+              color: 'black',
+              outline:'none',
+              border:'1px solid black'
               
             },
-            '&:hover fieldset': {
+            
+          
+            '&:hover > fieldset': {
               borderColor: 'black',
               color: 'black',
+              outline:'none',
+              border:'1px solid black'
             },
-            '&:active fieldset': {
+            '&:active > fieldset': {
               borderColor: 'black',
               color: 'black',
+              outline:'none',
+              border:'1px solid black'
             },
-            '&.Mui-focused fieldset': {
+            '&.Mui-focused > fieldset': {
               borderColor: 'black',
               color: 'black',
+              outline:'none',
+              border:'1px solid black'
+             
             },
            
           },

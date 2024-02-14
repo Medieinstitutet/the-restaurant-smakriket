@@ -1,4 +1,14 @@
 @use 'variables' as v;
 @use 'mixins';
 @use 'reserveTable';
+@use 'reserveForm';
 @use 'booking';
+@use 'reservationComplete';
+
+
+*{
+
+    cursor: url(https://cur.cursors-4u.net/others/oth-6/oth551.cur), auto !important;
+  
+
+}

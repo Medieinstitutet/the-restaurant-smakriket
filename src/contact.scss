@@ -5,7 +5,6 @@
 .contact-container {
   text-align: center;
   padding: 25%;
-  padding: 0;
   background-color: grey;
   height: 100%;
   min-height: 100vh;
@@ -14,20 +13,13 @@ ul {
   list-style: none;
 }
 .opening-hours {
-  margin-top: 10%;
-}
-.icons {
-  margin-top: 10%;
+  margin-top: 10vh;
 }
 .insta-icon,
 .facebook-icon {
-  width: 10%;
+  width: 20%;
   height: auto;
-}
-.contact-info-header {
-  display: flex;
-  justify-content: center;
-  margin-top: 35%;
+  margin-top: 5vh;
 }
 @media (max-width: 880px) {
   .brand-icon {
@@ -41,36 +33,36 @@ ul {
 @media (min-width: 880px) {
   .contact-container {
     display: flex;
-    align-items: center;
+    flex-direction: row;
     text-align: center;
-  }
-
-  .contact-info,
-  .opening-hours {
-    flex: 1;
-  }
-
-  .brand-icon {
-    display: block;
-    width: 300px;
-    margin-right: 200px;
-  }
-  .contact-info-header {
-    display: flex;
-    justify-content: center ali;
-    margin-top: 10%;
-  }
-  .contact-info {
-    margin-bottom: 0;
-  }
-  .insta-icon,
-  .facebook-icon {
-    display: inline-block;
-    width: 60px;
-    height: auto;
-    margin-right: 80px;
+    justify-content: center;
+    height: 100vh;
+    padding-top: 7%;
   }
   .icons-mobilemode {
     display: none;
+  }
+  .icons-desktopmode {
+    width: 40vh;
+  }
+  .brand-icon {
+    width: 90vh;
+    margin-left: 25%;
+  }
+  .opening-hours {
+    margin-right: 70%;
+    margin-top: 20%;
+  }
+  .contact-info {
+    margin-top: 20%;
+    margin-right: 15%;
+  }
+  .opening-title,
+  .info-title {
+    font-size: larger;
+  }
+  .opening-hours p,
+  .contact-info p {
+    margin-bottom: 30px;
   }
 }

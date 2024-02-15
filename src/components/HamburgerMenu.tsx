@@ -54,6 +54,16 @@ export const HamburgerMenu = (props: IHamburgerMenyProps) => {
                   </NavLink>
                 </li>
               ))}
+
+
+
+{adminLogin ? <li >
+                  <NavLink className="hamburgerMenu--listLinks" to= { "/SignIn"}>ADMIN
+                  </NavLink>
+                </li> : ""}
+
+
+
               <li >
                   <NavLink className="hamburgerMenu--listLinks" to= {adminLogin ? "/" : "/SignIn"}>
                    <button className="desktopMenu--btn" onClick={OnClickLogOut}>  {adminLogin ? 'LOGGA UT' : 'LOGGA IN'}</button>

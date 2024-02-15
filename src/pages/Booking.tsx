@@ -4,6 +4,9 @@ import { ReserveForm } from "../components/ReserveForm";
 import { ReservationComplete } from "../components/ReservationComplete";
 import { BookingProvider } from "../context/BookingContext";
 import returant from '../assets/homePageImage.png'
+;
+import { LoadingAnimation } from "../components/LoadingAnimation";
+import { UseGlobalContext } from "../context/GlobalContext";
 
 
 
@@ -12,6 +15,9 @@ import returant from '../assets/homePageImage.png'
 export const Booking = () => {
 const [reservationFlow, setReservationFlow] = useState<string>('reserveTable')
 const [fade, setFade] = useState<boolean>(true)
+const {loading} = UseGlobalContext()
+
+
 
   return(
   
@@ -23,11 +29,15 @@ const [fade, setFade] = useState<boolean>(true)
 <section className={fade? "BookingContainer": 'BookingContainerOut'}> 
 
 <BookingProvider>
-{reservationFlow === 'reserveTable' && < ReserveTable setReservationFlow={setReservationFlow}/>}
 
-{reservationFlow === 'reserveFrom' && <ReserveForm setReservationFlow={setReservationFlow} /> }
 
-{reservationFlow === 'reserveComplete' && <ReservationComplete setFade={setFade}  /> }
+{loading &&  < LoadingAnimation />}
+
+{!loading && reservationFlow === 'reserveTable' && < ReserveTable setReservationFlow={setReservationFlow}/>}
+
+{!loading && reservationFlow === 'reserveFrom' && <ReserveForm setReservationFlow={setReservationFlow} /> }
+
+{!loading && reservationFlow === 'reserveComplete' && <ReservationComplete setFade={setFade}  /> }
 </BookingProvider>
 </section>
     </article>

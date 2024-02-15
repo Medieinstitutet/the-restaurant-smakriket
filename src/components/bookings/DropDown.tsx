@@ -7,7 +7,7 @@ interface Props{
 
 
 export const DropDown = ({setPersons}:Props) => {
-    const person = [1, 2, 3, 4, 5, 6];
+    const person = [1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15];
     
 
 
@@ -22,7 +22,7 @@ export const DropDown = ({setPersons}:Props) => {
         <select id="persons" onChange={handleChange}>
           
           {person.map((person) => (
-            <option value={person} key={person} >
+            <option className="number" value={person} key={person} >
               {person}
             </option>
           ))}

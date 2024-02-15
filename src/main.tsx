@@ -4,12 +4,12 @@ import "./index.scss";
 import "./scss/styles.scss"
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Router.tsx";
-import { AdminLoginProvider } from "./context/AdminLogin.tsx";
+import {  GlobalProvider } from "./context/GlobalContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <AdminLoginProvider > 
+    <GlobalProvider > 
     <RouterProvider router={router}></RouterProvider>
-    </AdminLoginProvider>
+    </GlobalProvider>
   </React.StrictMode>
 );

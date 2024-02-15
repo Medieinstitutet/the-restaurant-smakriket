@@ -5,6 +5,7 @@ import { ReactNode, createContext, useState, Dispatch, SetStateAction, useContex
 
 
 interface ReservevationData {
+
     children?:  false | ReactNode;
     restaurantId?: string,
     date?: string,
@@ -24,7 +25,8 @@ interface ReservevationData {
       phone?:string
       setPhone:   Dispatch<SetStateAction<string>>,
 
-    
+      reservationId?: string,
+      setReservationId:  Dispatch<SetStateAction<string>>,
   
   
    }
@@ -52,10 +54,10 @@ export const BookingProvider = ({ children }: Props) => {
   const [lastName, setLastName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
-   
+const [reservationId, setReservationId] = useState('523-564')
 
     return (
-        <BookingContext.Provider value={{  restaurantId, date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastName, setLastName, email, setEmail, phone, setPhone}}>
+        <BookingContext.Provider value={{  restaurantId, date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastName, setLastName, email, setEmail, phone, setPhone, reservationId, setReservationId}}>
             {children}
         </BookingContext.Provider>
     );

@@ -17,7 +17,7 @@ interface Props{
 
 
 export const ReservationComplete = ({setFade}:Props) => {
-  const { date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastName, setLastName, email, setEmail, phone, setPhone} = UseBookingContext()
+  const { date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastName, setLastName, email, setEmail, phone, setPhone, reservationId, setReservationId} = UseBookingContext()
 const navigate = useNavigate();
 
 
@@ -34,7 +34,7 @@ const navigate = useNavigate();
       setLastName('')
       setPhone('')
       navigate('/');
-      
+     setReservationId
 
 
 
@@ -60,9 +60,10 @@ const navigate = useNavigate();
       </section>
 <section className='reservationContainer___customerinfo'> 
 
-      <h4 className='reservationContainer___customerinfo___h4'>Reservations registrerad:</h4>
+      <h4 className='reservationContainer___customerinfo___h4'>Reservationsinformation:</h4>
    
-      <section> 
+      <section>
+        <p>Reservation: {reservationId }</p> 
       <p>{name} {lastName}</p>
       <p> {email}</p>
       <p> {phone}</p>

@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { UseGlobalContext } from '../../context/GlobalContext';
 interface Props{
-    login: boolean; 
-    setLogin:(login:boolean) => void
+   
     setReservationFlow:(selectedDate:string) => void
   }
   

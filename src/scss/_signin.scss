@@ -128,6 +128,20 @@
 
         }
 
+        .ModifyOrDeleteContainer{
+
+            @include mixins.section() {}
+
+          flex-direction: row;
+
+            button {
+                @include mixins.button() {}
+margin: 0 3.5rem;
+z-index: 10;
+            }
+
+        }
+
 
     }
 

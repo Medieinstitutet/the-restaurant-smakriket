@@ -1,20 +1,33 @@
 import { NavLink } from "react-router-dom";
 import { HamburgerMenu } from "./HamburgerMenu";
 import { useState } from "react";
+import { UseGlobalContext } from "../context/GlobalContext";
 
 export function Navigation() {
   const [showNav, setShowNav] = useState(false);
+  const {adminLogin, setAdminLogin} = UseGlobalContext()
 
   const menuItems = [
     { path: "/", label: "HEM" },
     { path: "/Booking", label: "BOKA/RESERVE" },
     { path: "/Contact", label: "KONTAKT" },
-    { path: "/SignIn", label: "LOGGA IN" },
+    
   ];
+
+
+
 
   if (showNav) {
     setShowNav(!showNav);
   }
+
+
+const OnClickLogOut = ():void => {
+if(adminLogin){
+  setAdminLogin(false)}
+
+}
+
 
   return (
     <>
@@ -33,6 +46,13 @@ export function Navigation() {
                   </NavLink>
                 </li>
               ))}
+
+<li >
+                  <NavLink className="desktopMenu--listLinks" to= {adminLogin ? "/" : "/SignIn"}>
+                   <button className="desktopMenu--btn" onClick={OnClickLogOut}>  {adminLogin ? 'LOGGA UT' : 'LOGGA IN'}</button>
+                  </NavLink>
+                </li>
+
             </ul>
           </nav>
         </section>

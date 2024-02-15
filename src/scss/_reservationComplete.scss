@@ -2,16 +2,7 @@
 @use 'mixins';
 
 .reservationContainer {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    background: v.$background-light;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: clamp(12px, 1vw, 16px);
+    @include mixins.section() {}
 
     &___bookinginfo {
 

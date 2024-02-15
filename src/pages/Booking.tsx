@@ -3,8 +3,7 @@ import ReserveTable from "../components/bookings/ReserveTable";
 import { ReserveForm } from "../components/ReserveForm";
 import { ReservationComplete } from "../components/ReservationComplete";
 import { BookingProvider } from "../context/BookingContext";
-import returant from '../assets/homePageImage.png'
-;
+import returant from '../assets/homePageImage.png';
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { UseGlobalContext } from "../context/GlobalContext";
 
@@ -13,7 +12,7 @@ import { UseGlobalContext } from "../context/GlobalContext";
 
 
 export const Booking = () => {
-const [reservationFlow, setReservationFlow] = useState<string>('reserveTable')
+const [reservationFlow, setReservationFlow] = useState<string>('first')
 const [fade, setFade] = useState<boolean>(true)
 const {loading} = UseGlobalContext()
 
@@ -33,7 +32,7 @@ const {loading} = UseGlobalContext()
 
 {loading &&  < LoadingAnimation />}
 
-{!loading && reservationFlow === 'reserveTable' && < ReserveTable setReservationFlow={setReservationFlow}/>}
+{!loading && reservationFlow === 'first' && < ReserveTable setReservationFlow={setReservationFlow}/>}
 
 {!loading && reservationFlow === 'reserveFrom' && <ReserveForm setReservationFlow={setReservationFlow} /> }
 

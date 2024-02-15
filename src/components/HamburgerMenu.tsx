@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { IoMdMenu } from "react-icons/io";
 import { NavLink } from "react-router-dom";
+import { UseGlobalContext } from "../context/GlobalContext";
 
 interface MenuItem {
   path: string;
@@ -15,6 +16,7 @@ interface IHamburgerMenyProps {
 
 export const HamburgerMenu = (props: IHamburgerMenyProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const {adminLogin, setAdminLogin} = UseGlobalContext()
 
   const toggleHamburgerMenu = () => {
     setIsOpen(!isOpen);
@@ -23,6 +25,11 @@ export const HamburgerMenu = (props: IHamburgerMenyProps) => {
   const handleNavClick = () => {
     setIsOpen(!isOpen);
   };
+  const OnClickLogOut = ():void => {
+    if(adminLogin){
+      setAdminLogin(false)}
+    
+    }
 
   return (
    
@@ -47,6 +54,11 @@ export const HamburgerMenu = (props: IHamburgerMenyProps) => {
                   </NavLink>
                 </li>
               ))}
+              <li >
+                  <NavLink className="hamburgerMenu--listLinks" to= {adminLogin ? "/" : "/SignIn"}>
+                   <button className="desktopMenu--btn" onClick={OnClickLogOut}>  {adminLogin ? 'LOGGA UT' : 'LOGGA IN'}</button>
+                  </NavLink>
+                </li>
             </ul>
           </nav>
         )}

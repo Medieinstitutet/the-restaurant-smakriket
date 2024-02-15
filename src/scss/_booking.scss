@@ -1,67 +1,11 @@
 @use "variables" as v;
 @use 'mixins';
 
-@keyframes Blur {
 
-    0% {
-        filter: blur(25px);
-
-    }
-
-    100% {
-
-        filter: blur(0px);
-
-    }
-
-
-}
-
-
-@keyframes Opacity {
-
-    0% {
-        filter: opacity(0%);
-
-    }
-
-    100% {
-
-        filter: opacity(100%);
-
-    }
-
-
-}
-
-@keyframes Out {
-
-    0% {
-        filter: opacity(100%) blur(0);
-
-    }
-
-    100% {
-
-        filter: opacity(0%) blur(25px);
-        ;
-
-    }
-
-
-}
 
 .BookingArticle {
-    height: fit-content;
-    width: 100%;
-    min-height: 100vh;
-    position: absolute;
-    top: 0;
-    z-index: -1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+
+    @include mixins.article() {}
 
 
     &___overLay,

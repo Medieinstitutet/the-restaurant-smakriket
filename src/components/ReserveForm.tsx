@@ -44,7 +44,7 @@ const handleCancel = () => {
 setFirstName('')
 setPhoneNumber('')
 setMail('')
-setReservationFlow('reserveTable')
+setReservationFlow('first')
   };
 
   return (
@@ -58,6 +58,8 @@ setReservationFlow('reserveTable')
           value={firstname} 
           onChange={(e) => setFirstName(e.target.value)} 
           required 
+          minLength={2}
+          maxLength={15}
         />
       </div>
       <div>
@@ -69,6 +71,8 @@ setReservationFlow('reserveTable')
           value={lastname} 
           onChange={(e) => setLastname(e.target.value)} 
           required 
+         minLength={2}
+         maxLength={15}
         />
       </div>
       <div>
@@ -91,6 +95,8 @@ setReservationFlow('reserveTable')
           value={phoneNumber} 
           onChange={(e) => setPhoneNumber(e.target.value)} 
           required 
+          minLength={7}
+          maxLength={15}
         />
       </div>
       <section className='reserveForm___btn'>

@@ -2,21 +2,7 @@
 @use 'mixins';
 
 .reserveForm {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    background: v.$background-light;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    border-radius: 5px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
+    @include mixins.section() {}
 
     div {
         margin: 1.3rem 0 0 0;

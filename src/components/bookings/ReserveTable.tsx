@@ -8,6 +8,7 @@ import { UseBookingContext } from '../../context/BookingContext';
 
 
 
+
 interface Props{
   
     setReservationFlow:(selectedDate:string) => void
@@ -24,7 +25,7 @@ const ReserveTable = ({setReservationFlow}:Props) => {
   const [errorMessage, setErrorMessage] = useState<string>('')
   const { setDate,  setTime,  setNumberOfGuests,  setName,  setLastName,  setEmail,  setPhone} = UseBookingContext()
   
-  
+
 
 
 
@@ -63,6 +64,8 @@ const ReserveTable = ({setReservationFlow}:Props) => {
 
 
   return (
+
+
     <section className="reserveContainer"> 
 <section className="reserveContainer___inputs"> 
 <section className='dropDownContainer'>
@@ -93,6 +96,7 @@ const ReserveTable = ({setReservationFlow}:Props) => {
 
 
     </section>
+   
   )
 }
 

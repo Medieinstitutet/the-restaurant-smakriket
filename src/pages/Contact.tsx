@@ -6,11 +6,11 @@ export const Contact = () => {
       <div className="contact-container">
         <ul>
           <li>
-            <img src="src/assets/logoBlack.png" alt="bild på restaurangensvarumärke" className="brand-icon" />
+            <img src="src/assets/logo.png" alt="bild på restaurangensvarumärke" className="brand-icon" />
           </li>
         </ul>
         <div className="contact-info">
-          <ul>
+          <ul className="ul1">
             <li>
               <p className="info-title">
                 <b>"Smakriket"</b>
@@ -20,10 +20,8 @@ export const Contact = () => {
               <p>Tel: +46 123 465 789</p>
               <p>Email:info@smakriket.se</p>
             </li>
-          </ul>
-          <div className="icons-desktopmode">
-            <ul>
-              <li>
+            <li>
+              <div className="icons-desktopmode">
                 <img
                   src="src/images/icons/svg/icons8-instagram.svg"
                   alt="bild på instagrams logga"
@@ -34,12 +32,12 @@ export const Contact = () => {
                   alt="bild på facebooks logga"
                   className="facebook-icon"
                 />
-              </li>
-            </ul>
-          </div>
+              </div>
+            </li>
+          </ul>
         </div>
         <div className="opening-hours">
-          <ul>
+          <ul className="ul2">
             <li>
               <p className="opening-title">
                 <b>Öppetider</b>

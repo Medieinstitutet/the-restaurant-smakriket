@@ -33,18 +33,6 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
 
   const handleSave = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const bookingData = {
-      restaurantId: restaurantId,
-      date: date,
-      time: time,
-      numberOfGuests: numberOfGuests,
-      customer: {
-        name: name,
-        lastname: lastName,
-        email: email,
-        phone: phone,
-      },
-    };
 
     /* context */
     setName(firstname);
@@ -52,10 +40,23 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
     setPhone(phoneNumber);
     setEmail(mail);
 
+    const bookingData = {
+      restaurantId: restaurantId,
+      date: date,
+      time: time,
+      numberOfGuests: numberOfGuests,
+      customer: {
+        name: firstname,
+        lastname: lastname,
+        email: mail,
+        phone: phoneNumber,
+      },
+    };
+
     postBooking(bookingData)
       .then((response) => {
         setReservationId(response.insertedId);
-        console.log(response.insertedId);
+
         console.log("Booking submitted successfully:", response);
       })
       .catch((error) => {
@@ -123,10 +124,10 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
         />
       </div>
       <section className="reserveForm___btn">
-        <button type="submit">Save</button>
         <button type="button" onClick={handleCancel}>
-          Cancel
+          Avbryt
         </button>
+        <button type="submit">Boka</button>
       </section>
     </form>
   );

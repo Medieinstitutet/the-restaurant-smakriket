@@ -1,11 +1,11 @@
 import axios from "axios";
-import { Booking } from "../models/Booking";
 
-export const postBooking = async (bookingData: Booking) => {
+export const postBooking = async (bookingData: any) => {
   try {
-    const response = await axios.post<Booking>(
+    console.log(bookingData);
+    const response = await axios.post<any>(
       "https://school-restaurant-api.azurewebsites.net/booking/create",
-      bookingData // Använd det insamlade bokningsdata-objektet här
+      bookingData
     );
 
     return response.data;

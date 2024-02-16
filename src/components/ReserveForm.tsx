@@ -11,16 +11,56 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
   const [lastname, setLastname] = useState<string>("");
   const [mail, setMail] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
-  const { setName, setLastName, setEmail, setPhone } = UseBookingContext();
+  const {
+    date,
+    setDate,
+    time,
+    setTime,
+    numberOfGuests,
+    setNumberOfGuests,
+    name,
+    setName,
+    lastName,
+    setLastName,
+    email,
+    setEmail,
+    phone,
+    setPhone,
+    reservationId,
+    setReservationId,
+    restaurantId,
+  } = UseBookingContext();
 
   const handleSave = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    const bookingData = {
+      restaurantId: restaurantId,
+      date: date,
+      time: time,
+      numberOfGuests: numberOfGuests,
+      customer: {
+        name: name,
+        lastname: lastName,
+        email: email,
+        phone: phone,
+      },
+    };
 
     /* context */
     setName(firstname);
     setLastName(lastname);
     setPhone(phoneNumber);
     setEmail(mail);
+
+    postBooking(bookingData)
+      .then((response) => {
+        setReservationId(response.insertedId);
+        console.log(response.insertedId);
+        console.log("Booking submitted successfully:", response);
+      })
+      .catch((error) => {
+        console.error("Error submitting booking:", error);
+      });
 
     /* form */
     setFirstName("");

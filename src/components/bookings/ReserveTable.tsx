@@ -1,4 +1,4 @@
-import { useState, MouseEvent, useContext } from "react";
+import { useState, MouseEvent, useEffect } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment, { Moment } from "moment";
@@ -7,8 +7,6 @@ import { DropDown } from "./DropDown";
 import { UseBookingContext } from "../../context/BookingContext";
 import { AvailableTables } from "../availableTables";
 import { GetBookings } from "../../services/getBookings";
-
-
 
 interface Props {
   setReservationFlow: (selectedDate: string) => void;
@@ -22,9 +20,25 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
   const [selectedDate, setSelectedDate] = useState<Moment>(moment());
   const [persons, setPersons] = useState<number>(1);
   const [findBookings, setFindBookings] = useState<FindBooking[]>([]);
-  const {bookings, setDate, setTime, setNumberOfGuests, setName, setLastname, setEmail, setPhone, error } = UseBookingContext();
- 
+  const [hasCheckedAvailability, setHasCheckedAvailability] = useState(false);
+  const [shouldShowButtons, setShouldShowButtons] = useState<boolean>(false);
 
+  useEffect(() => {
+    onClickFindTables();
+  }, [selectedDate, persons]);
+
+  const {
+    bookings,
+    setBookings,
+    setDate,
+    setTime,
+    setNumberOfGuests,
+    setName,
+    setLastname,
+    setEmail,
+    setPhone,
+    error,
+  } = UseBookingContext();
 
   /* reset all context data */
   setDate("");
@@ -35,30 +49,49 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
   setLastname("");
   setPhone("");
 
-  const getData = async() => {
- GetBookings()
-
+  const getData = async () => {
+    GetBookings();
   };
 
-  if (bookings.length === 0 && !error ){
- 
+  if (bookings.length === 0 && !error) {
     getData();
   }
-
-
-
-
-
-
-
-
 
   /* Find tables */
   const onClickFindTables = () => {
     const newDate = selectedDate.format("YYYY-MM-DD");
+    // Kontrollera om både datum och antal gäster är valda
     if (selectedDate && persons) {
-      setFindBookings([{ time: "18:00" }, { time: "21:00" }]);
-    } 
+      // Kontrollera tillgängligheten för tiderna 18:00 och 21:00 för det valda datumet och antalet gäster
+      const isAvailable18 = AvailableTables(bookings, newDate, persons, "18:00");
+      const isAvailable21 = AvailableTables(bookings, newDate, persons, "21:00");
+
+      // Uppdatera tillståndet för att indikera om tillgängliga bord hittades för någon av tiderna
+      setHasCheckedAvailability(isAvailable18 || isAvailable21);
+
+      // Om minst en av tiderna är tillgänglig
+      if (isAvailable18 || isAvailable21) {
+        // Skapa en lista för tillgängliga tider
+        const availableTimes: FindBooking[] = [];
+        // Om tiderna är tillgängliga, lägg till dem i listan
+        if (isAvailable18) {
+          availableTimes.push({ time: "18:00" });
+        }
+        if (isAvailable21) {
+          availableTimes.push({ time: "21:00" });
+        }
+        // Uppdatera tillståndet för att visa de tillgängliga tiderna och knapparna
+        setFindBookings(availableTimes);
+        setShouldShowButtons(true);
+        // Uppdatera bokningstillståndet med de senaste bokningarna
+        setBookings(bookings);
+      } else {
+        // Om inga bord är tillgängliga för någon av tiderna
+        // Rensa listan med tillgängliga tider och dölj knapparna
+        setFindBookings([]);
+        setShouldShowButtons(false);
+      }
+    }
   };
 
   /* Reserve table */
@@ -102,7 +135,7 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
             })}
           </>
         ) : (
-          <p> {error} </p>
+          <p> {error} Tyvärr inga tider tillgängliga</p>
         )}
       </section>
     </section>

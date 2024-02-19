@@ -1,57 +1,36 @@
-import { UseBookingContext } from "../context/BookingContext";
+import { IBooking } from "../models/IBookings";
 
-export const AvailableTables = (
-  date: string,
-  persons: number,
-  setHasCheckedAvailability: React.Dispatch<React.SetStateAction<boolean>>
-) => {
+export const AvailableTables = (bookings: IBooking[], date: string, persons: number, time: string) => {
   const tablesToBook = 15;
-  const { bookings } = UseBookingContext();
 
-  // Beräkna totalt antal bord som behövs vid bokning, alltså hur många gäster vill användaren boka för?
+  // Beräkna det totala antalet bord som behövs för bokningen baserat på antalet gäster
   const totalTablesNeeded = Math.ceil(persons / 6);
   console.log("Antal bord som behövs", totalTablesNeeded);
 
-  // Filtrera ut bokningar på det aktuella datumet som användare klickat på
-  const filteredBookingsByDate = bookings.filter((booking) => booking.date === date);
-  // Filtrera ut bokningar på de olika tiderna för det akutella datumet
-  const bookingsEarlyTime = filteredBookingsByDate.filter((time) => time.time === "18:00");
-  const bookingsLateTime = filteredBookingsByDate.filter((time) => time.time === "21:00");
-  console.log("Alla bokningar det valda datumet", filteredBookingsByDate);
-  console.log("kl 18", bookingsEarlyTime, "kl 21:", bookingsLateTime);
+  // Filtrera bokningarna för det valda datumet och tiden
+  const filteredBookings = bookings.filter((booking) => booking.date === date && booking.time === time);
+  console.log("Alla bokningar det valda datumet och tid", filteredBookings);
 
-  let totalTablesBookedEarly = 0;
-  // Gå igenom alla bokningar för den tidiga tiden och summera antalet bord redan bokade
-  bookingsEarlyTime.forEach((booking) => {
+  // Beräkna det totala antalet bord som redan är bokade för den valda tiden
+  let totalTablesBooked = 0;
+  filteredBookings.forEach((booking) => {
     const numberOfGuests = booking.numberOfGuests;
-    // För vardera bokning räknas det ut hur många bord som är bokade baserat på antalet gäster
-    totalTablesBookedEarly += Math.ceil(numberOfGuests / 6);
+    // Beräkna antalet bord som behövs för varje bokning baserat på antalet gäster och lägg till det till totalt antal bokade bord
+    totalTablesBooked += Math.ceil(numberOfGuests / 6);
   });
-  console.log("Totalt antal bord redan bokade för tidig tid:", totalTablesBookedEarly);
+  console.log("Totalt antal bord redan bokade:", totalTablesBooked);
 
-  let totalTablesBookedLate = 0;
-  // Samma sak för den sena tiden som den tidiga
-  bookingsLateTime.forEach((booking) => {
-    const numberOfGuests = booking.numberOfGuests;
-    totalTablesBookedLate += Math.ceil(numberOfGuests / 6);
-  });
-  console.log("Totalt antal bord redan bokade för sen tid:", totalTablesBookedLate);
+  // Beräkna antalet bord som är kvar att boka
+  const tablesLeftToBook = tablesToBook - totalTablesBooked;
+  console.log("antal bord det finns kvar att boka", tablesLeftToBook);
 
-  // Beräkna hur många bord det finns kvar att boka
-  const tablesLeftToBookEarly = tablesToBook - totalTablesBookedEarly;
-  console.log("antal bord det finns kvar att boka kl 18:00", tablesLeftToBookEarly);
-
-  // Beräkna totalt antal borden redan bokade för det aktuella datumet och den sena tiden, samt hur många bord det finns kvar att boka
-  const tablesLeftToBookLate = tablesToBook - totalTablesBookedLate;
-  console.log("antal bord det finns kvar att boka kl 21:00", tablesLeftToBookLate);
-
-  if (tablesLeftToBookEarly >= totalTablesNeeded || tablesLeftToBookLate >= totalTablesNeeded) {
-    setHasCheckedAvailability(true);
+  // Om det finns tillräckligt med bord kvar att boka
+  if (tablesLeftToBook > 0) {
+    // Kontrollera om antalet kvarvarande bord är tillräckligt för att täcka det totala behovet av bord
+    return tablesLeftToBook >= totalTablesNeeded;
   } else {
-    setHasCheckedAvailability(false);
+    return false; // Om antalet kvarvarande bord är mindre än noll, returnera false
   }
-
-  return null;
 };
 
 export default AvailableTables;

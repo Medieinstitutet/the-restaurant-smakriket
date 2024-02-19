@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Navigation } from "./components/Navigations";
-import { getBookings } from "./services/getBookings";
+import { GetBookings } from "./services/getBookings";
 import { IBooking } from "./models/IBookings";
 import { useState } from "react";
 import { BookingsListContext } from "./context/BookingsListContext";
@@ -10,7 +10,7 @@ export const Layout = () => {
   console.log(bookings);
 
   const getData = async () => {
-    const bookingsResponse = await getBookings();
+    const bookingsResponse = await GetBookings();
 
     setBookings(bookingsResponse);
   };

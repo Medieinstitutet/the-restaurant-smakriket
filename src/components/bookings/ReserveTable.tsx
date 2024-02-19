@@ -6,9 +6,9 @@ import { DatePickerComponent } from "./DatePickerComponent";
 import { DropDown } from "./DropDown";
 import { UseBookingContext } from "../../context/BookingContext";
 import { AvailableTables } from "../availableTables";
-import { IBooking } from "../../models/IBookings";
-import { getBookings } from "../../services/getBookings";
-import { BookingsListContext } from "../../context/BookingsListContext";
+import { GetBookings } from "../../services/getBookings";
+
+
 
 interface Props {
   setReservationFlow: (selectedDate: string) => void;
@@ -22,14 +22,9 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
   const [selectedDate, setSelectedDate] = useState<Moment>(moment());
   const [persons, setPersons] = useState<number>(1);
   const [findBookings, setFindBookings] = useState<FindBooking[]>([]);
+  const {bookings, setDate, setTime, setNumberOfGuests, setName, setLastname, setEmail, setPhone, error } = UseBookingContext();
+ 
 
-  const { setDate, setTime, setNumberOfGuests, setName, setLastName, setEmail, setPhone, error, setError } =
-    UseBookingContext();
-
-  /* Nollställer error om fel-meddelande finns när sidan startas */
-  setError("");
-
-  const [bookings, setBookings] = useState<IBooking[]>([]);
 
   /* reset all context data */
   setDate("");
@@ -37,26 +32,33 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
   setNumberOfGuests(0);
   setName("");
   setEmail("");
-  setLastName("");
+  setLastname("");
   setPhone("");
 
-  const getData = async () => {
-    const bookingsResponse = await getBookings();
+  const getData = async() => {
+ GetBookings()
 
-    setBookings(bookingsResponse);
   };
 
-  if (bookings.length === 0) {
+  if (bookings.length === 0 && !error ){
+ 
     getData();
   }
+
+
+
+
+
+
+
+
+
   /* Find tables */
   const onClickFindTables = () => {
     const newDate = selectedDate.format("YYYY-MM-DD");
     if (selectedDate && persons) {
       setFindBookings([{ time: "18:00" }, { time: "21:00" }]);
-    } else {
-      setError("inga bord");
-    }
+    } 
   };
 
   /* Reserve table */

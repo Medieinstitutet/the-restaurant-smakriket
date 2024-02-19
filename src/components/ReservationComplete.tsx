@@ -5,7 +5,7 @@ import { UseBookingContext } from '../context/BookingContext';
 
 interface Props{
 
-
+  setReservationFlow:(reservationFlow:string) => void
   setFade: (fade:boolean) => void
 
 
@@ -16,13 +16,14 @@ interface Props{
 
 
 
-export const ReservationComplete = ({setFade}:Props) => {
-  const {error, setError, date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastName, setLastName, email, setEmail, phone, setPhone, reservationId, setReservationId} = UseBookingContext()
+export const ReservationComplete = ({setFade, setReservationFlow}:Props) => {
+  const { error,  date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastname, setLastname, email, setEmail, phone, setPhone, reservationId, setReservationId} = UseBookingContext()
 const navigate = useNavigate();
 
-setError('')
 
   const onClickClose = () => {
+
+
     setFade(false)
     setTimeout(() =>{
 
@@ -31,11 +32,11 @@ setError('')
       setNumberOfGuests(0)
       setName('')
       setEmail('')
-      setLastName('')
+      setLastname('')
       setPhone('')
       navigate('/');
      setReservationId
-
+     setReservationFlow("first");
 
 
     }, 500)
@@ -69,7 +70,7 @@ setError('')
    
       <section>
         <p>Reservation: {reservationId }</p> 
-      <p>{name} {lastName}</p>
+      <p>{name} {lastname}</p>
       <p> {email}</p>
       <p> {phone}</p>
       </section>

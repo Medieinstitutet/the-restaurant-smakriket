@@ -11,10 +11,13 @@ import { UseGlobalContext } from "../context/GlobalContext";
 
 
 
+
 export const Booking = () => {
 const [reservationFlow, setReservationFlow] = useState<string>('first')
 const [fade, setFade] = useState<boolean>(true)
 const {loading} = UseGlobalContext()
+
+
 
 
 
@@ -36,7 +39,7 @@ const {loading} = UseGlobalContext()
 
 {!loading && reservationFlow === 'reserveFrom' && <ReserveForm setReservationFlow={setReservationFlow} /> }
 
-{!loading && reservationFlow === 'reserveComplete' && <ReservationComplete setFade={setFade}  /> }
+{!loading && reservationFlow === 'reserveComplete' && <ReservationComplete setFade={setFade} setReservationFlow={setReservationFlow}  /> }
 </BookingProvider>
 </section>
     </article>

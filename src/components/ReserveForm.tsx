@@ -1,38 +1,25 @@
-import { useState } from "react";
+
 import { UseBookingContext } from "../context/BookingContext";
 import { postBooking } from "../services/postBooking";
+import { UseGlobalContext } from "../context/GlobalContext";
 import { AvailableTables } from "./availableTables";
+import { useState } from "react";
 
 interface Props {
   setReservationFlow: (selectedDate: string) => void;
 }
 
 export const ReserveForm = ({ setReservationFlow }: Props) => {
-  const [firstname, setFirstName] = useState<string>("");
+ /*  const [firstname, setFirstName] = useState<string>("");
   const [lastname, setLastname] = useState<string>("");
   const [mail, setMail] = useState<string>("");
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>(""); */
   const [hasCheckedAvailability, setHasCheckedAvailability] = useState(false);
 
-  const {
-    date,
-    setDate,
-    time,
-    setTime,
-    numberOfGuests,
-    setNumberOfGuests,
-    name,
-    setName,
-    lastName,
-    setLastName,
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    reservationId,
-    setReservationId,
-    restaurantId,
-  } = UseBookingContext();
+  const {date, time, numberOfGuests, name, setName, lastname,setLastname,email,setEmail,phone, setPhone,setReservationId, restaurantId, setError, error} = UseBookingContext();
+  const {setLoading} = UseGlobalContext()
+
+
 
   if (!hasCheckedAvailability) {
     AvailableTables(date, numberOfGuests, setHasCheckedAvailability);
@@ -41,11 +28,6 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
   const handleSave = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
-    /* context */
-    setName(firstname);
-    setLastName(lastname);
-    setPhone(phoneNumber);
-    setEmail(mail);
 
     const bookingData = {
       restaurantId: restaurantId,
@@ -53,37 +35,46 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
       time: time,
       numberOfGuests: numberOfGuests,
       customer: {
-        name: firstname,
-        lastname: lastname,
-        email: mail,
-        phone: phoneNumber,
+        name,
+        lastname,
+        email,
+        phone,
       },
     };
-
     if (hasCheckedAvailability) {
-      postBooking(bookingData)
-        .then((response) => {
-          setReservationId(response.insertedId);
+    setLoading(true)
+    setError('')
+    postBooking(bookingData)
+      .then((response) => {
+        setReservationId(response.insertedId);
+setLoading(false)
 
-          console.log("Booking submitted successfully:", response);
-        })
-        .catch((error) => {
-          console.error("Error submitting booking:", error);
-        });
-    }
+setReservationFlow("reserveComplete");
+ 
 
-    /* form */
-    setFirstName("");
-    setLastname("");
-    setPhoneNumber("");
-    setMail("");
-    setReservationFlow("reserveComplete");
+        
+
+      })
+      .catch(() => {
+        setLoading(false)
+        setError('något gick fel')
+        setTimeout(() => {
+          setError('')
+           }, 3000);
+      
+      });
+
+  
+
+ }
+
   };
 
   const handleCancel = () => {
-    setFirstName("");
-    setPhoneNumber("");
-    setMail("");
+   setName("");
+setLastname("");
+setPhone("");
+setEmail(""); 
     setReservationFlow("first");
   };
 
@@ -94,9 +85,9 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
         <input
           type="text"
           id="firstname"
-          name="firstname"
-          value={firstname}
-          onChange={(e) => setFirstName(e.target.value)}
+          name="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           required
           minLength={2}
           maxLength={15}
@@ -117,7 +108,7 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
       </div>
       <div>
         <label htmlFor="mail">Email:</label>
-        <input type="mail" id="mail" name="mail" value={mail} onChange={(e) => setMail(e.target.value)} required />
+        <input type="mail" id="mail" name="mail" value={email} onChange={(e) => setEmail(e.target.value)} required />
       </div>
       <div>
         <label htmlFor="phoneNumber">Telefon:</label>
@@ -125,8 +116,8 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
           type="tel"
           id="phoneNumber"
           name="phoneNumber"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           required
           minLength={7}
           maxLength={15}
@@ -137,6 +128,12 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
           Avbryt
         </button>
         <button type="submit">Boka</button>
+      </section>
+      <section className="reserveForm___error">
+        <p >
+          {error}
+        </p>
+        
       </section>
     </form>
   );

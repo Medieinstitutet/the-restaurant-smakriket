@@ -14,7 +14,7 @@ export const GlobalContext = createContext<ContextProps | undefined>(undefined);
 
 export const GlobalProvider = ({ children }: ContextProps) => {
     const [adminLogin, setAdminLogin] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
    
     return (
         <GlobalContext.Provider value={{ adminLogin, setAdminLogin, loading, setLoading }}>

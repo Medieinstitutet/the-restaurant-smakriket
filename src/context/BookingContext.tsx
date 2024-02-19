@@ -1,4 +1,6 @@
 import { ReactNode, createContext, useState, Dispatch, SetStateAction, useContext } from "react";
+import { IBooking } from "../models/IBookings";
+import { IBookingResponse } from "../models/IBookingResponse";
 
 interface ReservevationData {
   children?: false | ReactNode;
@@ -12,8 +14,8 @@ interface ReservevationData {
 
   name: string;
   setName: Dispatch<SetStateAction<string>>;
-  lastName: string;
-  setLastName: Dispatch<SetStateAction<string>>;
+  lastname: string;
+  setLastname: Dispatch<SetStateAction<string>>;
   email: string;
   setEmail: Dispatch<SetStateAction<string>>;
   phone: string;
@@ -24,6 +26,10 @@ interface ReservevationData {
 
   error:string;
   setError: Dispatch<SetStateAction<string>>;
+
+
+  bookings: IBookingResponse[];
+  setBookings:Dispatch<SetStateAction<IBookingResponse[]>>
 }
 
 interface Props {
@@ -38,15 +44,18 @@ export const BookingProvider = ({ children }: Props) => {
   const [time, setTime] = useState<string>("");
   const [numberOfGuests, setNumberOfGuests] = useState<number>(0);
   const [name, setName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
+  const [lastname, setLastname] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
-  const [reservationId, setReservationId] = useState("523-564");
+  const [reservationId, setReservationId] = useState("");
   const [error, setError] = useState('')
+  const [bookings, setBookings] = useState<IBookingResponse[]>([]);
 
   return (
     <BookingContext.Provider
       value={{
+        bookings, 
+        setBookings,
         restaurantId,
         date,
         setDate,
@@ -56,8 +65,8 @@ export const BookingProvider = ({ children }: Props) => {
         setNumberOfGuests,
         name,
         setName,
-        lastName,
-        setLastName,
+        lastname,
+        setLastname,
         email,
         setEmail,
         phone,

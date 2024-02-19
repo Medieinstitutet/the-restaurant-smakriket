@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { UseBookingContext } from "../context/BookingContext";
 import { postBooking } from "../services/postBooking";
+import { AvailableTables } from "./availableTables";
 
 interface Props {
   setReservationFlow: (selectedDate: string) => void;
@@ -11,6 +12,8 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
   const [lastname, setLastname] = useState<string>("");
   const [mail, setMail] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [hasCheckedAvailability, setHasCheckedAvailability] = useState(false);
+
   const {
     date,
     setDate,
@@ -31,7 +34,11 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
     restaurantId,
   } = UseBookingContext();
 
-  const handleSave = (e: React.FormEvent<HTMLFormElement>): void => {
+  if (!hasCheckedAvailability) {
+    AvailableTables(date, numberOfGuests, setHasCheckedAvailability);
+  }
+
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     /* context */
@@ -53,15 +60,17 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
       },
     };
 
-    postBooking(bookingData)
-      .then((response) => {
-        setReservationId(response.insertedId);
+    if (hasCheckedAvailability) {
+      postBooking(bookingData)
+        .then((response) => {
+          setReservationId(response.insertedId);
 
-        console.log("Booking submitted successfully:", response);
-      })
-      .catch((error) => {
-        console.error("Error submitting booking:", error);
-      });
+          console.log("Booking submitted successfully:", response);
+        })
+        .catch((error) => {
+          console.error("Error submitting booking:", error);
+        });
+    }
 
     /* form */
     setFirstName("");

@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useContext } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment, { Moment } from "moment";
@@ -8,6 +8,7 @@ import { UseBookingContext } from "../../context/BookingContext";
 import { AvailableTables } from "../availableTables";
 import { IBooking } from "../../models/IBookings";
 import { getBookings } from "../../services/getBookings";
+import { BookingsListContext } from "../../context/BookingsListContext";
 
 interface Props {
   setReservationFlow: (selectedDate: string) => void;

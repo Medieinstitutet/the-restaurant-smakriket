@@ -37,4 +37,15 @@
 
 
     }
+    &___error{
+       
+        margin-top:clamp(15px, 3vh, 15px);
+        min-height: 20px;
+        font-size: 16px;
+ 
+        p{
+        margin: 0;
+            padding: 0;
+        }
+            }
 }

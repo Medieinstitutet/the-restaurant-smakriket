@@ -17,10 +17,10 @@ interface Props{
 
 
 export const ReservationComplete = ({setFade}:Props) => {
-  const { date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastName, setLastName, email, setEmail, phone, setPhone, reservationId, setReservationId} = UseBookingContext()
+  const {error, setError, date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastName, setLastName, email, setEmail, phone, setPhone, reservationId, setReservationId} = UseBookingContext()
 const navigate = useNavigate();
 
-
+setError('')
 
   const onClickClose = () => {
     setFade(false)
@@ -43,6 +43,11 @@ const navigate = useNavigate();
   };
 
   return (
+
+
+
+
+
     <section className='reservationContainer'>
       <section className='reservationContainer___bookinginfo'> 
         <div>
@@ -70,6 +75,14 @@ const navigate = useNavigate();
       </section>
       </section>
      <button onClick={onClickClose} className='reservationContainer___btn'> Stäng </button>
+<section className='reservationContainer___error'>
+ <p>{error}</p> 
+ </section>
     </section>
+
+
+
+
+
   );
 };

@@ -21,9 +21,14 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
   const [selectedDate, setSelectedDate] = useState<Moment>(moment());
   const [persons, setPersons] = useState<number>(1);
   const [findBookings, setFindBookings] = useState<FindBooking[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const { setDate, setTime, setNumberOfGuests, setName, setLastName, setEmail, setPhone, error, setError } =
+    UseBookingContext();
+
+  /* Nollställer error om fel-meddelande finns när sidan startas */
+  setError("");
+
   const [bookings, setBookings] = useState<IBooking[]>([]);
-  const { setDate, setTime, setNumberOfGuests, setName, setLastName, setEmail, setPhone } = UseBookingContext();
 
   /* reset all context data */
   setDate("");
@@ -47,12 +52,9 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
   const onClickFindTables = () => {
     const newDate = selectedDate.format("YYYY-MM-DD");
     if (selectedDate && persons) {
-      console.log(persons);
-
-      AvailableTables(bookings, newDate, persons); /* [{ time: "18:00" }, { time: "21:00" }] */
       setFindBookings([{ time: "18:00" }, { time: "21:00" }]);
     } else {
-      setErrorMessage("inga bord");
+      setError("inga bord");
     }
   };
 
@@ -81,7 +83,7 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
         </button>
       </section>
       <section className="reserveContainer___meassages">
-        {findBookings.length >= 1 && errorMessage === "" ? (
+        {findBookings.length >= 1 && error === "" ? (
           <>
             {findBookings.map((item, i) => {
               return (
@@ -97,7 +99,7 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
             })}
           </>
         ) : (
-          <p> {errorMessage} </p>
+          <p> {error} </p>
         )}
       </section>
     </section>

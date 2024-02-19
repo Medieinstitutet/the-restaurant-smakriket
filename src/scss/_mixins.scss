@@ -61,7 +61,8 @@ background-color: v.$secondary-color;
 @mixin articleSection() {
   margin: 15px 0;
   position: relative;
-  height: clamp(400px, 50vw, 500px);
+  height: clamp(430px, 60vh, 500px);
+  min-height: fit-content;
   width: clamp(100px, 90%, 600px);
   background-color: rgb(251, 253, 253);
   display: flex;
@@ -70,13 +71,15 @@ background-color: v.$secondary-color;
   border-radius: 5px;
   border: 1px solid v.$background-dark-hollow;
   font-family: v.$font-one;
- 
+  
+
   @content;
 
 
 }
 
 @mixin section() {
+
   position: relative;
     height: 100%;
     width: 100%;
@@ -87,6 +90,7 @@ background-color: v.$secondary-color;
     justify-content: center;
     align-items: center;
     z-index: 1;
+  
   @content;
 
 

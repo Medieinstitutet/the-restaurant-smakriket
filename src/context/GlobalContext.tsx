@@ -4,7 +4,7 @@ interface ContextProps {
     adminLogin?: boolean;
     setAdminLogin?: Dispatch<SetStateAction<boolean>>;
     loading?: boolean;
-    setLoading?: Dispatch<SetStateAction<boolean>>;
+    setLoading: Dispatch<SetStateAction<boolean>>;
     children?: ReactNode;
   
 }

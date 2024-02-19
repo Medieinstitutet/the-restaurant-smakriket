@@ -29,6 +29,11 @@ interface ReservevationData {
       setReservationId:  Dispatch<SetStateAction<string>>,
   
   
+
+      error?: string,
+      setError:  Dispatch<SetStateAction<string>>,
+  
+
    }
 
    interface Props{
@@ -54,10 +59,11 @@ export const BookingProvider = ({ children }: Props) => {
   const [lastName, setLastName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
+  const [error, setError] = useState('')
 const [reservationId, setReservationId] = useState('523-564')
 
     return (
-        <BookingContext.Provider value={{  restaurantId, date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastName, setLastName, email, setEmail, phone, setPhone, reservationId, setReservationId}}>
+        <BookingContext.Provider value={{ error, setError, restaurantId, date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastName, setLastName, email, setEmail, phone, setPhone, reservationId, setReservationId}}>
             {children}
         </BookingContext.Provider>
     );

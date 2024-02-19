@@ -34,9 +34,6 @@ ul {
 }
 /*--------------------------DESKTOP MODE--------------------------------------*/
 @media (min-width: 880px) {
-  * {
-    overflow: hidden;
-  }
   .contact-container {
     display: flex;
     flex-direction: row;

@@ -22,7 +22,7 @@ interface ReservevationData {
   reservationId: string;
   setReservationId: Dispatch<SetStateAction<string>>;
 
-  error:string;
+  error: string;
   setError: Dispatch<SetStateAction<string>>;
 }
 
@@ -42,7 +42,7 @@ export const BookingProvider = ({ children }: Props) => {
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [reservationId, setReservationId] = useState("523-564");
-  const [error, setError] = useState('')
+  const [error, setError] = useState("");
 
   return (
     <BookingContext.Provider
@@ -65,7 +65,7 @@ export const BookingProvider = ({ children }: Props) => {
         reservationId,
         setReservationId,
         error,
-        setError
+        setError,
       }}
     >
       {children}

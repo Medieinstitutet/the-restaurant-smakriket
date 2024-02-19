@@ -5,8 +5,8 @@ import moment, { Moment } from "moment";
 import { DatePickerComponent } from "./DatePickerComponent";
 import { DropDown } from "./DropDown";
 import { UseBookingContext } from "../../context/BookingContext";
-import { AvailableTables } from "../availableTables";
 import { GetBookings } from "../../services/getBookings";
+import AvailableTables from "../availableTables";
 
 interface Props {
   setReservationFlow: (selectedDate: string) => void;

@@ -14,3 +14,5 @@ export const postBooking = async (bookingData: any) => {
     throw error;
   }
 };
+
+/*---------------------------------------------------*/

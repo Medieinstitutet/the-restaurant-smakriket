@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { BookingsListContext } from "../context/BookingsListContext";
 import { UseBookingContext } from "../context/BookingContext";
 
 export const AvailableTables = (
@@ -8,7 +6,7 @@ export const AvailableTables = (
   setHasCheckedAvailability: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const tablesToBook = 15;
-  const { bookings } = UseBookingContext()
+  const { bookings } = UseBookingContext();
 
   // Beräkna totalt antal bord som behövs vid bokning, alltså hur många gäster vill användaren boka för?
   const totalTablesNeeded = Math.ceil(persons / 6);

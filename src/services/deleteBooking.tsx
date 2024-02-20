@@ -4,14 +4,10 @@ import { IBooking } from "../models/IBookings";
 
 export const deleteBooking = async (id: string, setError: Dispatch<SetStateAction<string>>) => {
   try {
-    const res = await axios.delete<IBooking>(`https://school-restaurant-api.azurewebsites.net/booking/delete/${id}`);
-    setError("Reservation uppdaterad");
+     await axios.delete<IBooking>(`https://school-restaurant-api.azurewebsites.net/booking/delete/${id}`);
+    setError("Reservation borttagen");
   } catch (error) {
     setError("något gick fel");
     console.log(error);
-  } finally {
-    setTimeout(() => {
-      setError("");
-    }, 3000);
-  }
+  } 
 };

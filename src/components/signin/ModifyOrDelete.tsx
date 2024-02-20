@@ -1,4 +1,6 @@
 
+
+
 import { useBookingContext } from "../../context/BookingContext";
 import { deleteBooking } from "../../services/deleteBooking";
 
@@ -8,13 +10,32 @@ interface Props {
 }
 
 export const ModifyOrDelete = ({ setReservationFlow }: Props) => {
-  const { reservationId, setError } = useBookingContext();
+  const { reservationId, setError, error,setBookings } = useBookingContext();
+
+setError('')
+
   const OnClickChange = (): void => {
     setReservationFlow("modify-date-persons");
   };
+
+
   const OnClickDelete = (): void => {
     deleteBooking(reservationId, setError);
   };
+
+
+if(error === 'Reservation borttagen'){
+  setError('Reservation borttagen')
+ setTimeout(() => {
+      setError("");
+      setBookings([])
+      setReservationFlow('first')
+    }, 3000);
+
+
+}
+
+
   return (
     <section className='ModifyOrDeleteContainer'>
       <section className='ModifyOrDeleteContainer___header'>
@@ -23,9 +44,21 @@ export const ModifyOrDelete = ({ setReservationFlow }: Props) => {
 
       </section>
       <section className='ModifyOrDeleteContainer___btn'> 
-<button onClick={OnClickChange}>Ändra</button>
+
+      {error !== 'Reservation borttagen' && <button onClick={OnClickChange}>Ändra</button> }
+
 <button onClick={OnClickDelete}>Radera</button>
 </section>
+
+
+<section className="ModifyOrDeleteContainer___error">
+        <p >
+          {error}
+        </p>
+        
+      </section>
+
+
     </section>
   );
 };

@@ -18,7 +18,7 @@ export const Booking = () => {
 const [reservationFlow, setReservationFlow] = useState<string>('first')
 const [fade, setFade] = useState<boolean>(true)
 const {loading} = useGlobalContext()
-const { setDate, setTime, setNumberOfGuests, setName, setLastname, setEmail, setPhone,  } = useBookingContext();
+const { setDate, setTime, setNumberOfGuests, setName, setLastname, setEmail, setPhone, setError } = useBookingContext();
  
 const dateString = new Date();
 const formattedDate = moment(dateString).format("YYYY-MM-DD");
@@ -31,7 +31,7 @@ setName("");
 setEmail("");
 setLastname("");
 setPhone("");
-
+setError('')
 
 
 

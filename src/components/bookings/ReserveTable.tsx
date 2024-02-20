@@ -48,7 +48,9 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
 
 
   const getData = async () => {
-    GetBookings();
+   await GetBookings();
+    if(error){
+    setError('')}
   };
 
   if (bookings.length === 0 && !error) {

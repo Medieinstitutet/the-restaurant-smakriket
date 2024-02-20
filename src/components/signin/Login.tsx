@@ -11,6 +11,7 @@ interface Props{
 
 export const Login = ({setReservationFlow }:Props) => {
     const [id, setId] = useState<string>('')
+    const [loginError, setloginError] = useState('')
     const [password, setPassword] = useState<string>('')
     const {bookings,setBookings, setDate, setTime,setNumberOfGuests,  setCustomerId, setReservationId,error, setError } = useBookingContext()
     const {adminLogin, setAdminLogin} = useGlobalContext()
@@ -28,7 +29,7 @@ export const Login = ({setReservationFlow }:Props) => {
         setBookings([])
     setId('')
     }else{
-    setError('Fel username eller lösenord')
+      setloginError('Fel username eller lösenord')
     setTimeout(() =>setError(''), 3000)
     }}}
     
@@ -105,7 +106,7 @@ export const Login = ({setReservationFlow }:Props) => {
             />  
           </div>: '' }
     <button type='submit'>{!adminLogin ? 'Logga in' : 'Sök'}</button>
-    <p className='signinContainer___signin___form___error'>{error}</p>
+    <p className='signinContainer___signin___form___error'>{!adminLogin ? `${loginError}` :`${error}`}</p>
     
     </form>
   )

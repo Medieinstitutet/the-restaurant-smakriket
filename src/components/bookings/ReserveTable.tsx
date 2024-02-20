@@ -115,10 +115,7 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DatePickerComponent selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
         </LocalizationProvider>
-        <button className="bookingBtn" onClick={onClickFindTables}>
-          {" "}
-          Hitta lediga bord
-        </button>
+        
       </section>
       <section className="reserveContainer___meassages">
         {findBookings.length >= 1 && error === "" ? (

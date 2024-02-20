@@ -29,6 +29,8 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
     setPhone,
     error,
     date,
+    setError,
+    numberOfGuests,
   } = useBookingContext();
   const [selectedDate, setSelectedDate] = useState<Moment>(moment(date));
   const [persons, setPersons] = useState<number>(1);
@@ -38,7 +40,8 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
 
   useEffect(() => {
     onClickFindTables();
-  }, [selectedDate, persons]);
+    setError("");
+  }, [selectedDate, numberOfGuests]);
 
   /* reset all context data */
   setDate("");
@@ -57,7 +60,7 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
     getData();
   }
 
-  /* Find tables */
+  // /* Find tables */
   const onClickFindTables = () => {
     const newDate = selectedDate.format("YYYY-MM-DD");
     // Kontrollera om både datum och antal gäster är valda
@@ -68,7 +71,6 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
 
       // Uppdatera tillståndet för att indikera om tillgängliga bord hittades för någon av tiderna
       setHasCheckedAvailability(isAvailable18 || isAvailable21);
-
       // Om minst en av tiderna är tillgänglig
       if (isAvailable18 || isAvailable21) {
         // Skapa en lista för tillgängliga tider

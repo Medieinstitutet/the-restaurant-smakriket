@@ -15,7 +15,7 @@ import { LoadingAnimation } from '../components/LoadingAnimation';
 export const SignIn = () => {
 const [reservationFlow, setReservationFlow] = useState('first')
 const {setError } = useBookingContext()
-const { loading, setLoading } = useGlobalContext()
+const { loading } = useGlobalContext()
 
 setError('')
 
@@ -31,7 +31,7 @@ setError('')
 {loading &&  < LoadingAnimation />}
 {!loading && reservationFlow === 'first' && <Login setReservationFlow={setReservationFlow}   />   }
 {!loading && reservationFlow === 'modify' && <ModifyOrDelete setReservationFlow={setReservationFlow}/>   }
-{!loading && reservationFlow === 'modify-date-persons' && <ReserveTable setReservationFlow={setReservationFlow} setLoading={setLoading} />   }
+{!loading && reservationFlow === 'modify-date-persons' && <ReserveTable setReservationFlow={setReservationFlow}  />   }
 
 
 

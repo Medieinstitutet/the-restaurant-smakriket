@@ -62,15 +62,6 @@ export const BookingProvider = ({ children }: Props) => {
 const [customerId, setCustomerId] = useState('')
 
 
-
-
-
-
-
-
-
-
-
   return (
     <BookingContext.Provider
       value={{

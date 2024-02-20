@@ -1,29 +1,39 @@
-
-import { useBookingContext } from "../context/BookingContext";
 import { postBooking } from "../services/postBooking";
 import { useGlobalContext } from "../context/GlobalContext";
-import { AvailableTables } from "./availableTables";
-import { useState } from "react";
+import { useBookingContext } from "../context/BookingContext";
 
 interface Props {
   setReservationFlow: (selectedDate: string) => void;
 }
 
 export const ReserveForm = ({ setReservationFlow }: Props) => {
-  const [hasCheckedAvailability, setHasCheckedAvailability] = useState(false);
+  /*  const [firstname, setFirstName] = useState<string>("");
+  const [lastname, setLastname] = useState<string>("");
+  const [mail, setMail] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>(""); */
 
-  const {setBookings,date, time, numberOfGuests, name, setName, lastname,setLastname,email,setEmail,phone, setPhone,setReservationId, restaurantId, setError, error} = useBookingContext();
-  const {setLoading} = useGlobalContext()
-
-
-
-  if (!hasCheckedAvailability) {
-    AvailableTables(date, numberOfGuests, setHasCheckedAvailability);
-  }
+  const {
+    date,
+    time,
+    numberOfGuests,
+    name,
+    setName,
+    lastname,
+    setLastname,
+    email,
+    setEmail,
+    phone,
+    setPhone,
+    setReservationId,
+    restaurantId,
+    setError,
+    error,
+    setBookings,
+  } = useBookingContext();
+  const { setLoading } = useGlobalContext();
 
   const handleSave = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-
 
     const bookingData = {
       restaurantId: restaurantId,
@@ -37,39 +47,31 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
         phone,
       },
     };
-    if (hasCheckedAvailability) {
-    setLoading(true)
-    setError('')
+
+    setLoading(true);
+    setError("");
     postBooking(bookingData)
       .then((response) => {
         setReservationId(response.insertedId);
-setLoading(false)
-setError('')
-setBookings([])
-setReservationFlow("reserveComplete");
-
- 
+        setLoading(false);
+        setError("");
+        setBookings([]);
+        setReservationFlow("reserveComplete");
       })
       .catch(() => {
-        setLoading(false)
-        setError('något gick fel')
+        setLoading(false);
+        setError("något gick fel");
         setTimeout(() => {
-          setError('')
-           }, 3000);
-      
+          setError("");
+        }, 3000);
       });
-
-  
-
- }
-
   };
 
   const handleCancel = () => {
-   setName("");
-setLastname("");
-setPhone("");
-setEmail(""); 
+    setName("");
+    setLastname("");
+    setPhone("");
+    setEmail("");
     setReservationFlow("first");
   };
 
@@ -125,10 +127,7 @@ setEmail("");
         <button type="submit">Boka</button>
       </section>
       <section className="reserveForm___error">
-        <p >
-          {error}
-        </p>
-        
+        <p>{error}</p>
       </section>
     </form>
   );

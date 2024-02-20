@@ -5,7 +5,7 @@ import { IBooking } from "../models/IBookings";
 
 
 export const GetBookings = async (id: string = "65c65652e125e85f5e15b7bf") => { 
-  const {setError, setBookings } = useBookingContext();
+  const { setBookings } = useBookingContext();
 
  
 
@@ -19,7 +19,7 @@ export const GetBookings = async (id: string = "65c65652e125e85f5e15b7bf") => {
    
   } catch (error) {
    
-    setError('något gick fel')
+console.log('error vid hämtning av alla bokningar')
   } 
 
 

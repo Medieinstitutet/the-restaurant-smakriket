@@ -17,7 +17,7 @@ interface Props{
 
 
 export const ReservationComplete = ({setFade, setReservationFlow}:Props) => {
-  const { error,  date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastname, setLastname, email, setEmail, phone, setPhone, reservationId, setReservationId} = useBookingContext()
+  const {  date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastname, setLastname, email, setEmail, phone, setPhone, reservationId, setReservationId} = useBookingContext()
 const navigate = useNavigate();
 
 
@@ -76,9 +76,7 @@ const navigate = useNavigate();
       </section>
       </section>
      <button onClick={onClickClose} className='reservationContainer___btn'> Stäng </button>
-<section className='reservationContainer___error'>
- <p>{error}</p> 
- </section>
+
     </section>
 
 

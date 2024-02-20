@@ -6,10 +6,11 @@ interface Props {
 }
 
 export const DropDown = ({ setPersons }: Props) => {
-  const [guestNumber, setGuestNumber] = useState(1);
+  const { numberOfGuests, setNumberOfGuests } = useBookingContext();
+  const [guestNumber, setGuestNumber] = useState(numberOfGuests);
   const person = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
-  const { numberOfGuests, setNumberOfGuests } = useBookingContext();
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();

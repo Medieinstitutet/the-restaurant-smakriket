@@ -2,6 +2,7 @@
 
 
 import { useBookingContext } from "../../context/BookingContext";
+import { useGlobalContext } from "../../context/GlobalContext";
 import { deleteBooking } from "../../services/deleteBooking";
 
 
@@ -11,8 +12,10 @@ interface Props {
 
 export const ModifyOrDelete = ({ setReservationFlow }: Props) => {
   const { reservationId, setError, error,setBookings } = useBookingContext();
+  
+  const {setLoading } = useGlobalContext()
 
-setError('')
+
 
   const OnClickChange = (): void => {
     setReservationFlow("modify-date-persons");
@@ -20,7 +23,7 @@ setError('')
 
 
   const OnClickDelete = (): void => {
-    deleteBooking(reservationId, setError);
+    deleteBooking(reservationId, setError,setLoading);
   };
 
 
@@ -45,9 +48,9 @@ if(error === 'Reservation borttagen'){
       </section>
       <section className='ModifyOrDeleteContainer___btn'> 
 
-      {error !== 'Reservation borttagen' && <button onClick={OnClickChange}>Ändra</button> }
+      {error !== 'Reservation borttagen' ?<>  <button onClick={OnClickChange}>Ändra</button> <button onClick={OnClickDelete}>Radera</button> </> : <> </> }
 
-<button onClick={OnClickDelete}>Radera</button>
+
 </section>
 
 

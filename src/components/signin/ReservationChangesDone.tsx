@@ -1,4 +1,5 @@
 import { useBookingContext } from '../../context/BookingContext'
+import { useGlobalContext } from '../../context/GlobalContext'
 import { UpdateBooking } from '../../models/UpdateBooking'
 import {  updateReservation } from '../../services/updateReservation'
 interface Props{
@@ -6,6 +7,9 @@ interface Props{
   }
 export const ReservationChangesDone = ({setReservationFlow }:Props) => {
   const { date, time,numberOfGuests,  customerId, restaurantId, reservationId, setBookings, setError, error } = useBookingContext()
+  const { setLoading } = useGlobalContext()
+
+
 const bookingData:UpdateBooking = {
   id:reservationId,
   restaurantId,
@@ -16,7 +20,7 @@ const bookingData:UpdateBooking = {
 };
 const OnClickSave = async() => {
  
-const res = await updateReservation(reservationId, bookingData, setError)
+const res = await updateReservation(reservationId, bookingData, setError,setLoading)
 if(res)
 setBookings([]), 
 setError('')

@@ -51,7 +51,7 @@ export const BookingProvider = ({ children }: Props) => {
   const formattedDate = moment(dateString).format("YYYY-MM-DD");
   const [date, setDate] = useState<string>(String(formattedDate));
   const [time, setTime] = useState<string>("");
-  const [numberOfGuests, setNumberOfGuests] = useState<number>(0);
+  const [numberOfGuests, setNumberOfGuests] = useState<number>(1);
   const [name, setName] = useState<string>("");
   const [lastname, setLastname] = useState<string>("");
   const [email, setEmail] = useState<string>("");

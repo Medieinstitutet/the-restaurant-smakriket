@@ -8,8 +8,10 @@ import { GetBookings } from "../../services/getBookings";
 import AvailableTables from "../availableTables";
 import { useBookingContext } from "../../context/BookingContext";
 
+
 interface Props {
   setReservationFlow: (selectedDate: string) => void;
+
 }
 
 interface FindBooking {
@@ -32,6 +34,10 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
     setError,
     numberOfGuests,
   } = useBookingContext();
+
+
+
+
   const [selectedDate, setSelectedDate] = useState<Moment>(moment(date));
   const [persons, setPersons] = useState<number>(1);
   const [findBookings, setFindBookings] = useState<FindBooking[]>([]);
@@ -43,14 +49,7 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
     setError("");
   }, [selectedDate, numberOfGuests]);
 
-  /* reset all context data */
-  setDate("");
-  setTime("");
-  setNumberOfGuests(0);
-  setName("");
-  setEmail("");
-  setLastname("");
-  setPhone("");
+
 
   const getData = async () => {
     GetBookings();

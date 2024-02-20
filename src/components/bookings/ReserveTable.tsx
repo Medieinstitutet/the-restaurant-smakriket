@@ -1,10 +1,10 @@
-import { useState, MouseEvent, useContext } from "react";
+import { useState, MouseEvent } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment, { Moment } from "moment";
 import { DatePickerComponent } from "./DatePickerComponent";
 import { DropDown } from "./DropDown";
-import { UseBookingContext } from "../../context/BookingContext";
+import { useBookingContext } from "../../context/BookingContext";
 import { AvailableTables } from "../availableTables";
 import { GetBookings } from "../../services/getBookings";
 
@@ -19,38 +19,23 @@ interface FindBooking {
 }
 
 const ReserveTable = ({ setReservationFlow }: Props) => {
-  const [selectedDate, setSelectedDate] = useState<Moment>(moment());
+  const {bookings, date, setDate, setTime, setNumberOfGuests,  error } = useBookingContext();
+  const [selectedDate, setSelectedDate] = useState<Moment>(moment(date));
   const [persons, setPersons] = useState<number>(1);
   const [findBookings, setFindBookings] = useState<FindBooking[]>([]);
-  const {bookings, setDate, setTime, setNumberOfGuests, setName, setLastname, setEmail, setPhone, error } = UseBookingContext();
- 
 
 
-  /* reset all context data */
-  setDate("");
-  setTime("");
-  setNumberOfGuests(0);
-  setName("");
-  setEmail("");
-  setLastname("");
-  setPhone("");
 
   const getData = async() => {
- GetBookings()
-
-  };
-
-  if (bookings.length === 0 && !error ){
- 
-    getData();
-  }
-
-
-
-
-
-
-
+    GetBookings()
+    
+    };
+    
+    if (bookings.length === 0 && !error ){
+    
+      getData();
+    }
+    
 
 
   /* Find tables */

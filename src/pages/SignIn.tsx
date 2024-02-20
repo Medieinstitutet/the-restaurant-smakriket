@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import returant from '../assets/homePageImage.png';
-import { ReserveForm } from '../components/ReserveForm';
-import { BookingProvider } from '../context/BookingContext';
+import { BookingProvider} from '../context/BookingContext';
 import { Login } from '../components/signin/Login';
 import { ReservationChangesDone } from '../components/signin/ReservationChangesDone';
 import ReserveTable from '../components/bookings/ReserveTable';
 import { ModifyOrDelete } from '../components/signin/ModifyOrDelete';
+
 
 
 
@@ -17,12 +17,9 @@ const [reservationFlow, setReservationFlow] = useState('first')
 
 
 
-
-
   return (
     <BookingProvider>
   <article className="signinContainer">
-
 
 <img  src={returant} alt="resturant" className="signinContainer___backgroundImg" />
 <div className="signinContainer___overLay" ></div>
@@ -31,10 +28,10 @@ const [reservationFlow, setReservationFlow] = useState('first')
 {reservationFlow === 'first' && <Login setReservationFlow={setReservationFlow}    />   }
 {reservationFlow === 'modify' && <ModifyOrDelete setReservationFlow={setReservationFlow}/>   }
 {reservationFlow === 'modify-date-persons' && <ReserveTable setReservationFlow={setReservationFlow}/>   }
-{reservationFlow === 'reserveFrom' &&<ReserveForm setReservationFlow={setReservationFlow}/>   }
 
 
-{reservationFlow === 'reserveComplete' && <ReservationChangesDone setReservationFlow={setReservationFlow}/>  }
+
+{reservationFlow === 'reserveFrom' && <ReservationChangesDone setReservationFlow={setReservationFlow}/>  }
 
 
 

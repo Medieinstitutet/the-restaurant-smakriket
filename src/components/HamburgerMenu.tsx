@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { IoMdMenu } from "react-icons/io";
 import { NavLink } from "react-router-dom";
-import { UseGlobalContext } from "../context/GlobalContext";
+import { useGlobalContext } from "../context/GlobalContext";
 
 interface MenuItem {
   path: string;
@@ -16,7 +16,7 @@ interface IHamburgerMenyProps {
 
 export const HamburgerMenu = (props: IHamburgerMenyProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { adminLogin, setAdminLogin } = UseGlobalContext();
+  const { adminLogin, setAdminLogin } = useGlobalContext();
 
   const toggleHamburgerMenu = () => {
     setIsOpen(!isOpen);

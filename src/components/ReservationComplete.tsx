@@ -1,6 +1,6 @@
 
 import { useNavigate } from 'react-router-dom';
-import { UseBookingContext } from '../context/BookingContext';
+import { useBookingContext } from '../context/BookingContext';
 
 
 interface Props{
@@ -17,7 +17,7 @@ interface Props{
 
 
 export const ReservationComplete = ({setFade, setReservationFlow}:Props) => {
-  const { error,  date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastname, setLastname, email, setEmail, phone, setPhone, reservationId, setReservationId} = UseBookingContext()
+  const { error,  date, setDate, time, setTime, numberOfGuests, setNumberOfGuests, name, setName, lastname, setLastname, email, setEmail, phone, setPhone, reservationId, setReservationId} = useBookingContext()
 const navigate = useNavigate();
 
 

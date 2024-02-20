@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { HamburgerMenu } from "./HamburgerMenu";
 import { useState } from "react";
-import { UseGlobalContext } from "../context/GlobalContext";
+import { useGlobalContext } from "../context/GlobalContext";
 
 export function Navigation() {
   const [showNav, setShowNav] = useState(false);
-  const { adminLogin, setAdminLogin } = UseGlobalContext();
+  const { adminLogin, setAdminLogin } = useGlobalContext();
 
   const menuItems = [
     { path: "/", label: "HEM" },

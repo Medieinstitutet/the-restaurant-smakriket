@@ -63,6 +63,7 @@ background-color: v.$secondary-color;
   position: relative;
   height: clamp(430px, 60vh, 500px);
   min-height: fit-content;
+  min-height: -moz-fit-content;
   width: clamp(100px, 90%, 600px);
   background-color: rgb(251, 253, 253);
   display: flex;

@@ -1,5 +1,8 @@
 import { ReactNode, createContext, useState, Dispatch, SetStateAction, useContext } from "react";
 import { IBooking } from "../models/IBookings";
+import moment from "moment";
+
+
 
 
 interface ReservevationData {
@@ -24,6 +27,10 @@ interface ReservevationData {
   reservationId: string;
   setReservationId: Dispatch<SetStateAction<string>>;
 
+
+  customerId:string;
+  setCustomerId: Dispatch<SetStateAction<string>>;
+
   error: string;
   setError: Dispatch<SetStateAction<string>>;
 
@@ -40,7 +47,9 @@ export const BookingContext = createContext<ReservevationData | undefined>(undef
 
 export const BookingProvider = ({ children }: Props) => {
   const restaurantId: string = "65c65652e125e85f5e15b7bf";
-  const [date, setDate] = useState<string>("");
+  const dateString = new Date();
+  const formattedDate = moment(dateString).format("YYYY-MM-DD");
+  const [date, setDate] = useState<string>(String(formattedDate));
   const [time, setTime] = useState<string>("");
   const [numberOfGuests, setNumberOfGuests] = useState<number>(0);
   const [name, setName] = useState<string>("");
@@ -50,6 +59,17 @@ export const BookingProvider = ({ children }: Props) => {
   const [reservationId, setReservationId] = useState("");
   const [error, setError] = useState('')
   const [bookings, setBookings] = useState<IBooking[]>([]);
+const [customerId, setCustomerId] = useState('')
+
+
+
+
+
+
+
+
+
+
 
   return (
     <BookingContext.Provider
@@ -75,6 +95,7 @@ export const BookingProvider = ({ children }: Props) => {
         setReservationId,
         error,
         setError,
+        customerId, setCustomerId
       }}
     >
       {children}
@@ -82,7 +103,7 @@ export const BookingProvider = ({ children }: Props) => {
   );
 };
 
-export const UseBookingContext = (): ReservevationData => {
+export const useBookingContext = (): ReservevationData => {
   const context = useContext(BookingContext);
   if (!context) {
     throw new Error("useProductListContext must be used within a ProductListProvider");

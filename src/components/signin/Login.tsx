@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-import { UseGlobalContext } from '../../context/GlobalContext';
+import { useGlobalContext } from '../../context/GlobalContext';
+import { useBookingContext } from '../../context/BookingContext';
+import { GetBookings } from '../../services/getBookings';
+
 interface Props{
    
     setReservationFlow:(selectedDate:string) => void
@@ -9,14 +12,11 @@ interface Props{
 export const Login = ({setReservationFlow }:Props) => {
     const [id, setId] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const [error, setError] = useState('')
-    
-    const {adminLogin, setAdminLogin} = UseGlobalContext()
+    const {bookings,setBookings, setDate, setTime,setNumberOfGuests,  setCustomerId, setReservationId,error, setError } = useBookingContext()
+    const {adminLogin, setAdminLogin} = useGlobalContext()
   
-    
-    
-    console.log(import.meta.env.VITE_USERNAME,
-      import.meta.env.VITE_PASSWORD)
+
+
     
     
     const OnClickSignIn = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -24,24 +24,41 @@ export const Login = ({setReservationFlow }:Props) => {
     if(id && password){
     if(id === import.meta.env.VITE_USERNAME && password === import.meta.env.VITE_PASSWORD){
         setAdminLogin(true)
+        setBookings([])
     setId('')
     }else{
     setError('Fel username eller lösenord')
     setTimeout(() =>setError(''), 3000)
     }}}
     
-    /* ta bort sen */
+ 
+    const getData = () => {
+    GetBookings()
     
-    const array = [11111,22222,33333]
+      
+        };
+      
+        if (bookings.length === 0 && !error ){
+ 
+          getData();
+        }   
+
     
     const OnClickSearch = (e: React.FormEvent<HTMLFormElement>): void =>  {
       e.preventDefault()
+
+  
     
-      if(id){
-    const item = array.filter(item => item === +id)
+      if(id ){
+        const item = bookings.filter(item => item._id === id)
       if(item.length >= 1){
         setReservationFlow('modify')
         setAdminLogin(true)
+        setDate(item[0].date);
+        setTime(item[0].time);
+        setNumberOfGuests(item[0].numberOfGuests) 
+        setCustomerId(item[0].customerId)
+        setReservationId(item[0]._id)
    
       }else{
       setError('Reservation hittas inte')

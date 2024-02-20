@@ -2,10 +2,12 @@ import { useState } from "react";
 import ReserveTable from "../components/bookings/ReserveTable";
 import { ReserveForm } from "../components/ReserveForm";
 import { ReservationComplete } from "../components/ReservationComplete";
-import { BookingProvider } from "../context/BookingContext";
+import { BookingProvider, useBookingContext } from "../context/BookingContext";
 import returant from '../assets/homePageImage.png';
 import { LoadingAnimation } from "../components/LoadingAnimation";
-import { UseGlobalContext } from "../context/GlobalContext";
+import { useGlobalContext } from "../context/GlobalContext";
+import moment from "moment";
+
 
 
 
@@ -15,7 +17,20 @@ import { UseGlobalContext } from "../context/GlobalContext";
 export const Booking = () => {
 const [reservationFlow, setReservationFlow] = useState<string>('first')
 const [fade, setFade] = useState<boolean>(true)
-const {loading} = UseGlobalContext()
+const {loading} = useGlobalContext()
+const { setDate, setTime, setNumberOfGuests, setName, setLastname, setEmail, setPhone,  } = useBookingContext();
+ 
+const dateString = new Date();
+const formattedDate = moment(dateString).format("YYYY-MM-DD");
+
+/* reset all context data */
+setDate(String(formattedDate))
+setTime("");
+setNumberOfGuests(0);
+setName("");
+setEmail("");
+setLastname("");
+setPhone("");
 
 
 

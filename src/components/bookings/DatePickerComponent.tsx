@@ -1,6 +1,7 @@
 import { ThemeProvider, createTheme } from '@mui/material';
 import { DatePicker  } from '@mui/x-date-pickers/DatePicker';
 import moment, { Moment } from 'moment';
+import { useBookingContext } from '../../context/BookingContext';
 
 
 interface Props{
@@ -87,11 +88,16 @@ const theme = createTheme({
 
 
 export const DatePickerComponent = ({selectedDate, setSelectedDate}:Props) => {
-  const handleDateChange = ( value: Moment | null) => {
-    if(value)
+  const {setDate} = useBookingContext();
+  const handleDateChange = ( value: Moment | null ) => {
+    if(value){
   setSelectedDate(value);
-};
+setDate(value.format("YYYY-MM-DD"))
 
+
+
+}
+};
 
 
 

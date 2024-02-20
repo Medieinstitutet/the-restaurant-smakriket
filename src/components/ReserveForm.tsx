@@ -1,7 +1,7 @@
 
-import { UseBookingContext } from "../context/BookingContext";
+import { useBookingContext } from "../context/BookingContext";
 import { postBooking } from "../services/postBooking";
-import { UseGlobalContext } from "../context/GlobalContext";
+import { useGlobalContext } from "../context/GlobalContext";
 import { AvailableTables } from "./availableTables";
 import { useState } from "react";
 
@@ -10,14 +10,10 @@ interface Props {
 }
 
 export const ReserveForm = ({ setReservationFlow }: Props) => {
- /*  const [firstname, setFirstName] = useState<string>("");
-  const [lastname, setLastname] = useState<string>("");
-  const [mail, setMail] = useState<string>("");
-  const [phoneNumber, setPhoneNumber] = useState<string>(""); */
   const [hasCheckedAvailability, setHasCheckedAvailability] = useState(false);
 
-  const {date, time, numberOfGuests, name, setName, lastname,setLastname,email,setEmail,phone, setPhone,setReservationId, restaurantId, setError, error} = UseBookingContext();
-  const {setLoading} = UseGlobalContext()
+  const {setBookings,date, time, numberOfGuests, name, setName, lastname,setLastname,email,setEmail,phone, setPhone,setReservationId, restaurantId, setError, error} = useBookingContext();
+  const {setLoading} = useGlobalContext()
 
 
 
@@ -48,12 +44,11 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
       .then((response) => {
         setReservationId(response.insertedId);
 setLoading(false)
-
+setError('')
+setBookings([])
 setReservationFlow("reserveComplete");
+
  
-
-        
-
       })
       .catch(() => {
         setLoading(false)

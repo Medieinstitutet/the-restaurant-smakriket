@@ -120,19 +120,25 @@
 
             }
 
-            button {
-                @include mixins.button() {}
+            &___btn{
 
-                margin-top: 10%;
+                width: clamp(200px, 50vw, 250px);
+                button {
+                    @include mixins.button() {}
+                 
+                    margin-top: 10%;
+                }
+    
+
             }
-
+          
         }
 
         .ModifyOrDeleteContainer{
 
             @include mixins.section() {}
 
-          flex-direction: row;
+         
 
             button {
                 @include mixins.button() {}

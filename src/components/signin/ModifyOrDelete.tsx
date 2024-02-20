@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+
+import { useBookingContext } from "../../context/BookingContext";
 import { deleteBooking } from "../../services/deleteBooking";
-import { UseBookingContext } from "../../context/BookingContext";
+
 
 interface Props {
   setReservationFlow: (selectedDate: string) => void;
 }
 
 export const ModifyOrDelete = ({ setReservationFlow }: Props) => {
-  const { reservationId, setError } = UseBookingContext();
+  const { reservationId, setError } = useBookingContext();
   const OnClickChange = (): void => {
     setReservationFlow("modify-date-persons");
   };
@@ -22,7 +23,7 @@ export const ModifyOrDelete = ({ setReservationFlow }: Props) => {
 
       </section>
       <section className='ModifyOrDeleteContainer___btn'> 
-<button onClick={OnCklickChange}>Ändra</button>
+<button onClick={OnClickChange}>Ändra</button>
 <button onClick={OnClickDelete}>Radera</button>
 </section>
     </section>

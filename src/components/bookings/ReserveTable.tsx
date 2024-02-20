@@ -8,10 +8,8 @@ import { GetBookings } from "../../services/getBookings";
 import AvailableTables from "../availableTables";
 import { useBookingContext } from "../../context/BookingContext";
 
-
 interface Props {
   setReservationFlow: (selectedDate: string) => void;
-
 }
 
 interface FindBooking {
@@ -19,20 +17,8 @@ interface FindBooking {
 }
 
 const ReserveTable = ({ setReservationFlow }: Props) => {
-  const {
-    bookings,
-    setBookings,
-    setDate,
-    setTime,
-    setNumberOfGuests,
-    error,
-    date,
-    setError,
-    numberOfGuests,
-  } = useBookingContext();
-
-
-
+  const { bookings, setBookings, setDate, setTime, setNumberOfGuests, error, date, setError, numberOfGuests } =
+    useBookingContext();
 
   const [selectedDate, setSelectedDate] = useState<Moment>(moment(date));
   const [persons, setPersons] = useState<number>(1);
@@ -43,13 +29,10 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
   useEffect(() => {
     onClickFindTables();
     setError("");
-  }, [selectedDate, numberOfGuests]);
-
-
+  }, [selectedDate, numberOfGuests, bookings]);
 
   const getData = async () => {
-   await GetBookings();
-   
+    await GetBookings();
   };
 
   if (bookings.length === 0 && !error) {
@@ -111,7 +94,6 @@ const ReserveTable = ({ setReservationFlow }: Props) => {
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DatePickerComponent selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
         </LocalizationProvider>
-        
       </section>
       <section className="reserveContainer___meassages">
         {findBookings.length >= 1 && error === "" ? (

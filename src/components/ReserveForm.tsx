@@ -1,35 +1,15 @@
 import { postBooking } from "../services/postBooking";
 import { useGlobalContext } from "../context/GlobalContext";
 import { useBookingContext } from "../context/BookingContext";
+import { useState } from "react";
 
 interface Props {
   setReservationFlow: (selectedDate: string) => void;
 }
 
 export const ReserveForm = ({ setReservationFlow }: Props) => {
-  /*  const [firstname, setFirstName] = useState<string>("");
-  const [lastname, setLastname] = useState<string>("");
-  const [mail, setMail] = useState<string>("");
-  const [phoneNumber, setPhoneNumber] = useState<string>(""); */
-
-  const {
-    date,
-    time,
-    numberOfGuests,
-    name,
-    setName,
-    lastname,
-    setLastname,
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    setReservationId,
-    restaurantId,
-    setError,
-    error,
-    setBookings,
-  } = useBookingContext();
+const [checkGdpr, setCheckGdpr] = useState<boolean>(false)
+  const { date, time, numberOfGuests,name, setName, lastname, setLastname, email, setEmail, phone, setPhone, setReservationId, restaurantId, setError, error, setBookings} = useBookingContext();
   const { setLoading } = useGlobalContext();
 
   const handleSave = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -76,7 +56,7 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
   };
 
   return (
-    <form onSubmit={handleSave} className="reserveForm">
+    <form onSubmit={ handleSave } className="reserveForm">
       <div>
         <label htmlFor="firstname">Förnamn:</label>
         <input
@@ -119,6 +99,13 @@ export const ReserveForm = ({ setReservationFlow }: Props) => {
           minLength={7}
           maxLength={15}
         />
+      </div>
+      <div className="reserveForm___gdpr">
+
+<label htmlFor="check">Jag bekräftar att jag accepterar GDPR-villkoren 
+<input required type='checkbox' name="check" id="check" checked={checkGdpr} onClick={() => setCheckGdpr(!checkGdpr)} />
+</label>
+
       </div>
       <section className="reserveForm___btn">
         <button type="button" onClick={handleCancel}>
